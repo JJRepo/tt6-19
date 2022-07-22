@@ -13,8 +13,8 @@ const routes: Routes = [
   {path:'welcome/:name',component: WelcomeComponent},
   {path:'logout',component: LogoutComponent},
   {path:'register',component: RegisterComponent},
+  { path: 'home', component: HomeComponent},
   {path:'**',component: ErrorComponent}];
-  { path: 'home', component: HomeComponent}
 
 
 @NgModule({
