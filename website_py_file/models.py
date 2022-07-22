@@ -7,6 +7,11 @@ from flask_login import UserMixin
 def load_user(user_id):
     return User.query.get(user_id)
 
+# tags = db.Table('tags',
+#     db.Column('tag_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+#     db.Column('page_id', db.Integer, db.ForeignKey('wallet.id'), primary_key=True)
+# )
+
 class User(db.Model, UserMixin):
 
     # Create a table in the db
@@ -17,6 +22,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.VARCHAR(20), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    wallet = db.relationship('Wallet',backref='user', uselist=False )
     wallet = db.relationship('Wallet',backref='user', uselist=False )
 
     def __init__(self, email, username, password):
@@ -35,8 +41,6 @@ class User(db.Model, UserMixin):
 
 class Wallet(db.Model):
 
-    # Create a table in the db
-    ### To be edited to suit the SQL framework
     __tablename__ = 'wallet'
 
     id = db.Column(db.Integer, primary_key = True)
@@ -71,3 +75,35 @@ class ExchangeRate(db.Model):
     def __repr__(self):
         rep = 'ExchangeRate(' + self.base_currency + ',' + self.exchange_currency + ',' + str(self.rate) + ')'
         return rep
+        
+class Currency(db.Model):
+
+    __tablename__ = 'currency'
+
+    id = db.Column(db.Integer, primary_key = True)
+    amount = db.Column(db.Float)
+    wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
+
+
+    def __init__(self, amount, wallet_id ):
+        self.amount = amount
+        self.wallet_id = wallet_id
+
+    def __repr__(self):
+        return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
+
+class Transc(db.Model):
+
+    __tablename__ = 'currency'
+
+    id = db.Column(db.Integer, primary_key = True)
+    amount = db.Column(db.Float)
+    wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
+
+
+    def __init__(self, amount, wallet_id ):
+        self.amount = amount
+        self.wallet_id = wallet_id
+
+    def __repr__(self):
+        return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
