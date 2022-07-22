@@ -10,6 +10,7 @@
                 <th>Desciption</th>
                 <th>Target Date</th>
                 <th>My Currency</th>
+                <th>Amount</th>
                 <th>ChangeCurrency</th>
                 <th>Update</th>
                 <th>Delete</th>
@@ -21,7 +22,8 @@
                 <td>{{transaction.description}}</td>
                 <td>{{transaction.targetDate}}</td>
                 <td>{{transaction.currency}}</td>
-                <div class="dropdown">
+                <td>{{transaction.value}}</td>
+                <td class="dropdown">
                     <button class="dropbtn">Change Currency</button>
                     <div class="dropdown-content">
                       <a href="#">CAD</a>
@@ -36,7 +38,7 @@
                       <a href="#">THB</a>
                       <a href="#">USD</a>
                     </div>
-                  </div>
+                </td>
                 <td><button (click)="updateTransaction(transaction.id)" class="btn btn-success">Update</button></td>
                 <td><button (click)="deleteTransaction(transaction.id)" class="btn btn-warning">Delete</button></td>
 
