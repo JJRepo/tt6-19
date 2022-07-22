@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { RegisterComponent } from './register/register.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [  
@@ -10,6 +11,7 @@ const routes: Routes = [
   {path:'login',component: LoginComponent},
   {path:'welcome/:name',component: WelcomeComponent},
   {path:'logout',component: LogoutComponent},
+  {path:'register',component: RegisterComponent},
   {path:'**',component: ErrorComponent}];
 
 @NgModule({
