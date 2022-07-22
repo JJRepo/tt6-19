@@ -58,7 +58,7 @@ class Wallet(db.Model):
 
 class Currency(db.Model):
 
-    __tablename__ = 'wallet'
+    __tablename__ = 'currency'
 
     id = db.Column(db.Integer, primary_key = True)
     amount = db.Column(db.Float)
