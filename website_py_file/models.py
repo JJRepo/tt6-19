@@ -92,10 +92,22 @@ class Transaction(db.Model):
     updated_by = db.Column(db.Text)
 
     def __init__(self, debit_amount, debit_currency, wallet_id,
-                debit_id, currency_id, currency_amount, credit_currency
+                debit_id, currency_id, currency_amount, credit_currency,
                 description, created_at, created_by, updated_at, updated_by):
-        self.amount = amount
+        self.debit_amount = debit_amount
+        self.debit_currency = debit_currency
         self.wallet_id = wallet_id
+        self.debit_id = debit_id
+        self.currency_id = currency_id
+        self.currency_amount = currency_amount
+        self.credit_currency = credit_currency
+        self.description = description
+        self.created_at = created_at
+        self.created_by = created_by
+        self.updated_at = updated_at
+        self.updated_by = updated_by
+
 
     def __repr__(self):
-        return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
+        return (f"Amount in wallet: {self.debit_amount}
+                wallet_id is : {self.debit_currency}")
