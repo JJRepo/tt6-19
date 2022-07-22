@@ -82,6 +82,7 @@ class Currency(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     amount = db.Column(db.Float)
+    currency = db.Column(db.VARCHAR(3))
     wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
 
 
@@ -92,18 +93,18 @@ class Currency(db.Model):
     def __repr__(self):
         return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
 
-class Transc(db.Model):
+# class Transaction(db.Model):
+# 
+#     __tablename__ = 'transaction'
 
-    __tablename__ = 'currency'
-
-    id = db.Column(db.Integer, primary_key = True)
-    amount = db.Column(db.Float)
-    wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
-
-
-    def __init__(self, amount, wallet_id ):
-        self.amount = amount
-        self.wallet_id = wallet_id
-
-    def __repr__(self):
-        return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
+    # id = db.Column(db.Integer, primary_key = True)
+    # amount = db.Column(db.Float)
+    # wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
+    #
+    #
+    # def __init__(self, amount, wallet_id ):
+    #     self.amount = amount
+    #     self.wallet_id = wallet_id
+    #
+    # def __repr__(self):
+    #     return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
