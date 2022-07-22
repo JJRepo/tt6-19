@@ -45,7 +45,7 @@ class Wallet(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.Text)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-    currency = db.relationship('Currency',backref='wallet' )
+    #currency = db.relationship('Currency',backref='wallet' )
     # debit_id = db.relationship('Transaction',backref='wallet')
     # credit_id = db.relationship('Transaction',backref='wallet')
 
@@ -77,7 +77,7 @@ class Currency(db.Model):
 
 class Transaction(db.Model):
 
-    __tablename__ = 'transaction'
+    __tablename__ = 'transactions'
 
     id = db.Column(db.Integer, primary_key = True)
     debit_amount = db.Column(db.Float)
@@ -85,7 +85,7 @@ class Transaction(db.Model):
     wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
     debit_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
     currency_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
-    currency_amount = db.Column(db.Float)
+    credit_amount = db.Column(db.Float)
     credit_currency = db.Column(db.String(3))
     description = db.Column(db.Text)
     created_at = db.Column(db.DateTime)
