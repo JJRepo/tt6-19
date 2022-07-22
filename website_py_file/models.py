@@ -109,5 +109,4 @@ class Transaction(db.Model):
 
 
     def __repr__(self):
-        return (f"Amount in wallet: {self.debit_amount}
-                wallet_id is : {self.debit_currency}")
+        return f"Amount in wallet: {self.debit_amount} and wallet_id is : {self.debit_currency}"
