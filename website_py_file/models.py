@@ -86,9 +86,9 @@ class Transaction(db.Model):
     currency_amount = db.Column(db.Float)
     credit_currency = db.Column(db.String(3))
     description = db.Column(db.Text)
-    created_at = db.Column(db.Datetime)
+    created_at = db.Column(db.DateTime)
     created_by = db.Column(db.Text)
-    updated_at = db.Column(db.Datetime)
+    updated_at = db.Column(db.DateTime)
     updated_by = db.Column(db.Text)
 
     def __init__(self, debit_amount, debit_currency, wallet_id,
