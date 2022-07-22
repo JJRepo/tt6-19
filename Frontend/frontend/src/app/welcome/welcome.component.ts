@@ -20,7 +20,6 @@ export class WelcomeComponent implements OnInit {
     
     console.log('last line of getWelcomeMessage')
 
-    //console.log("get welcome message");
   }
 
 }
