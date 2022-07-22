@@ -7,6 +7,11 @@ from flask_login import UserMixin
 def load_user(user_id):
     return User.query.get(user_id)
 
+# tags = db.Table('tags',
+#     db.Column('tag_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+#     db.Column('page_id', db.Integer, db.ForeignKey('wallet.id'), primary_key=True)
+# )
+
 class User(db.Model, UserMixin):
 
     # Create a table in the db
@@ -15,8 +20,9 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(64), unique=True, index=True)
-    username = db.Column(db.VARCHAR(20), unique=True, index=True)
+    username = db.Column(db.String(20), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    wallet = db.relationship('Wallet',backref='user', uselist=False )
     wallet = db.relationship('Wallet',backref='user', uselist=False )
 
     def __init__(self, email, username, password):
@@ -35,8 +41,6 @@ class User(db.Model, UserMixin):
 
 class Wallet(db.Model):
 
-    # Create a table in the db
-    ### To be edited to suit the SQL framework
     __tablename__ = 'wallet'
 
     id = db.Column(db.Integer, primary_key = True)
@@ -51,3 +55,78 @@ class Wallet(db.Model):
 
     def __repr__(self):
         return f"user Name: {self.name} and wallet is : {self.user_id}"
+
+class ExchangeRate(db.Model):
+
+    # Create a table in the db
+    ### To be edited to suit the SQL framework
+    __tablename__ = 'exchange_rate'
+
+    id = db.Column(db.Integer, primary_key = True)
+    base_currency = db.Column(db.VARCHAR(20))
+    exchange_currency = db.Column(db.VARCHAR(20))
+    rate = db.Column(db.Float)
+
+    def __init__(self, base_currency, exchange_currency, rate):
+        self.base_currency = base_currency
+        self.exchange_currency = exchange_currency
+        self.rate = generate_rate
+
+    def __repr__(self):
+        rep = 'ExchangeRate(' + self.base_currency + ',' + self.exchange_currency + ',' + str(self.rate) + ')'
+        return rep
+        
+class Currency(db.Model):
+
+    __tablename__ = 'currency'
+
+    id = db.Column(db.Integer, primary_key = True)
+    amount = db.Column(db.Float)
+    currency = db.Column(db.String(3))
+    wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
+
+
+    def __init__(self, amount, wallet_id ):
+        self.amount = amount
+        self.wallet_id = wallet_id
+
+    def __repr__(self):
+        return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
+
+class Transaction(db.Model):
+
+    __tablename__ = 'transaction'
+
+    id = db.Column(db.Integer, primary_key = True)
+    debit_amount = db.Column(db.Float)
+    debit_currency = db.Column(db.String(3))
+    wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
+    debit_id = db.Column(db.Integer,db.ForeignKey('debit.id'))
+    currency_id = db.Column(db.Integer,db.ForeignKey('currency.id'))
+    currency_amount = db.Column(db.Float)
+    credit_currency = db.Column(db.String(3))
+    description = db.Column(db.Text)
+    created_at = db.Column(db.DateTime)
+    created_by = db.Column(db.Text)
+    updated_at = db.Column(db.DateTime)
+    updated_by = db.Column(db.Text)
+
+    def __init__(self, debit_amount, debit_currency, wallet_id,
+                debit_id, currency_id, currency_amount, credit_currency,
+                description, created_at, created_by, updated_at, updated_by):
+        self.debit_amount = debit_amount
+        self.debit_currency = debit_currency
+        self.wallet_id = wallet_id
+        self.debit_id = debit_id
+        self.currency_id = currency_id
+        self.currency_amount = currency_amount
+        self.credit_currency = credit_currency
+        self.description = description
+        self.created_at = created_at
+        self.created_by = created_by
+        self.updated_at = updated_at
+        self.updated_by = updated_by
+
+
+    def __repr__(self):
+        return f"Amount in wallet: {self.debit_amount} and wallet_id is : {self.debit_currency}"
