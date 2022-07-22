@@ -42,7 +42,7 @@ def login():
 @app.route('/wallets', methods=['POST'])
 def wallet():
     user = json.loads(request.data)
-    wallets = loginCheck(user[0],user[1])
+    wallets = getWallets(user)
     if len(wallets) > 0:
         temp = []
         for per in wallets:
@@ -54,7 +54,7 @@ def wallet():
 @app.route('/walletcurrencies', methods=['POST'])
 def walletcurrencies():
     user = json.loads(request.data)
-    currencies = getWalletCurrencies(user[0])
+    currencies = getWalletCurrencies(user)
     if len(currencies) > 0:
         return json.dumps({"message":"success","currencies":currencies})
     else:
@@ -63,7 +63,7 @@ def walletcurrencies():
 @app.route('/deletewallet', methods=['POST'])
 def deletewallet():
     user = json.loads(request.data)
-    currencies = deleteWallet(user[0])
+    currencies = deleteWallet(user)
     if len(currencies) > 0:
         return json.dumps({"message":"success"})
     else:
@@ -71,6 +71,15 @@ def deletewallet():
 
 @app.route('/exchangerates', methods=['POST'])
 def exchangerates():
+    rates = exchangerates()
+    if len(rates) > 0:
+        return json.dumps({"message":"success","rates":rates})
+    else:
+        return json.dumps({"message":"faield to delete"})
+
+@app.route('/changecurrency', methods=['POST'])
+def changeCurrency():
+    user = json.loads(request.data)
     rates = exchangerates()
     if len(rates) > 0:
         return json.dumps({"message":"success","rates":rates})
