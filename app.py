@@ -6,6 +6,7 @@ from website_py_file.models import User
 from website_py_file.forms import LoginForm, RegistrationForm
 from flask_jwt import JWT ,jwt_required
 import json
+from website_py_file.databaseAPI import loginCheck, getWallets, getWalletCurrencies, deleteWallet, getExchangeRates
 # import uvicorn
 # from fastapi import FastAPI
 
@@ -30,41 +31,51 @@ def logout():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     user = json.loads(request.data)
-    print(user)
-    #form = LoginForm()  
-    # if form.validate_on_submit():
-    #     ###To be edited to suit SQL
-    #     user = User.query.filter_by(email=form.email.data).first()
+    person = loginCheck(user[0],user[1])
+    if len(person) > 0:
+        print(person)
+        for per in person:
+            return json.dumps({"message":"success","username":per[0],"id":per[1],"name":per[2]})
+    else:
+        return json.dumps({"message":"faield to login"})
 
+@app.route('/wallets', methods=['POST'])
+def wallet():
+    user = json.loads(request.data)
+    wallets = loginCheck(user[0],user[1])
+    if len(wallets) > 0:
+        temp = []
+        for per in wallets:
+            temp.append({"id":per[0],"name":per[1]})
+        return json.dumps({"message":"success","wallets":temp})
+    else:
+        return json.dumps({"message":"faield to retrieve"})
 
-    #     if user.check_password(form.password.data) and user is not None:
+@app.route('/walletcurrencies', methods=['POST'])
+def walletcurrencies():
+    user = json.loads(request.data)
+    currencies = getWalletCurrencies(user[0])
+    if len(currencies) > 0:
+        return json.dumps({"message":"success","currencies":currencies})
+    else:
+        return json.dumps({"message":"faield to retrieve"})
 
+@app.route('/deletewallet', methods=['POST'])
+def deletewallet():
+    user = json.loads(request.data)
+    currencies = deleteWallet(user[0])
+    if len(currencies) > 0:
+        return json.dumps({"message":"success"})
+    else:
+        return json.dumps({"message":"faield to delete"})
 
-    #         login_user(user)
-    #         flash('Logged in successfully.')
-    #         next = request.args.get('next')
-
-    #         if next == None or not next[0]=='/':
-    #             next = url_for('welcome_user')
-
-    #         return redirect(next)
-    #return render_template('login.html', form=form)
-    return json.dumps({"message":"success","username":user[0]})
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
-
-    if form.validate_on_submit():
-        user = User(email=form.email.data,
-                    username=form.username.data,
-                    password=form.password.data)
-
-        db.session.add(user)
-        db.session.commit()
-        flash('Thanks for registering! Now you can login!')
-        return redirect(url_for('login'))
-    return render_template('register.html', form=form)
+@app.route('/exchangerates', methods=['POST'])
+def exchangerates():
+    rates = exchangerates()
+    if len(rates) > 0:
+        return json.dumps({"message":"success","rates":rates})
+    else:
+        return json.dumps({"message":"faield to delete"})
 
 if __name__ == '__main__':
     app.run(debug=True)
