@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
+  message = 'Some Welcome Message'
+  welcomeMessageFromService!: string;
+  name = ''
+  
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getWelcomeMessage() {
+    
+    console.log('last line of getWelcomeMessage')
+
+    //console.log("get welcome message");
   }
 
 }
