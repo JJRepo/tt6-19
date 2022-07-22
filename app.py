@@ -29,7 +29,7 @@ def logout():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    user = request.json()
+    user = json.loads(request.data)
     print(user)
     #form = LoginForm()  
     # if form.validate_on_submit():

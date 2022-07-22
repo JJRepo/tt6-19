@@ -3,14 +3,14 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
-
+from flask_cors import CORS, cross_origin
 
 login_manager = LoginManager()
 
 app = Flask(__name__)
 # api = Api(app)
 # jwt = JWT(app, authenticate, identity)
-
+cors = CORS(app)
 
 app.config['SECRET_KEY'] = 'mysecretkey'
 basedir = os.path.abspath(os.path.dirname(__file__))

@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   }
   handleLogin(){
     if(this.hardcodedAuthenService.authenticate(this.username,this.password)){
+      console.log(sessionStorage.getItem('authenticaterUser'))
       this.router.navigate(['welcome',this.username])
       this.invalidLogin = false;
     }else{
