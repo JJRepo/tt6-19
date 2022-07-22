@@ -108,7 +108,7 @@ class Transaction(db.Model):
         self.wallet_id = wallet_id
         self.debit_id = debit_id
         self.currency_id = currency_id
-        self.currency_amount = currency_amount
+        self.credit_amount = credit_amount
         self.credit_currency = credit_currency
         self.description = description
         self.created_at = created_at
