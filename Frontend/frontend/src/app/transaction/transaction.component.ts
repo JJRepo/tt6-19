@@ -7,7 +7,7 @@ export class Transaction{
   constructor(
     public id:number,
     public description:string,
-    public done:boolean,
+    public currency:string,
     public targetDate:Date
   ){
 
@@ -21,9 +21,13 @@ export class Transaction{
 })
 export class TransactionComponent implements OnInit {
 
-  transactions: Transaction[] = [];
-  message!: string;
+ // transactions: Transaction[] = [];
 
+  transactions = [
+    new Transaction(1,'Transaction 1 ','SGD',new Date()),
+  ]
+  message!: string;
+ 
   constructor(
     private transService:TransDataService,
     private router:Router
