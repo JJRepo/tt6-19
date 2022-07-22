@@ -5,6 +5,7 @@ from website_py_file import app,db
 from website_py_file.models import User
 from website_py_file.forms import LoginForm, RegistrationForm
 from flask_jwt import JWT ,jwt_required
+import json
 # import uvicorn
 # from fastapi import FastAPI
 
@@ -28,25 +29,27 @@ def logout():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
-    form = LoginForm()
-    if form.validate_on_submit():
-        ###To be edited to suit SQL
-        user = User.query.filter_by(email=form.email.data).first()
-
-
-        if user.check_password(form.password.data) and user is not None:
+    user = json.loads(request.data)
+    print(user)
+    #form = LoginForm()  
+    # if form.validate_on_submit():
+    #     ###To be edited to suit SQL
+    #     user = User.query.filter_by(email=form.email.data).first()
 
 
-            login_user(user)
-            flash('Logged in successfully.')
-            next = request.args.get('next')
+    #     if user.check_password(form.password.data) and user is not None:
 
-            if next == None or not next[0]=='/':
-                next = url_for('welcome_user')
 
-            return redirect(next)
-    return render_template('login.html', form=form)
+    #         login_user(user)
+    #         flash('Logged in successfully.')
+    #         next = request.args.get('next')
+
+    #         if next == None or not next[0]=='/':
+    #             next = url_for('welcome_user')
+
+    #         return redirect(next)
+    #return render_template('login.html', form=form)
+    return json.dumps({"message":"success","username":user[0]})
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
