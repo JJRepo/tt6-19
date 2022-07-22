@@ -14,6 +14,7 @@ import { ErrorComponent } from './error/error.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TransactionComponent } from './transaction/transaction.component';
     LogoutComponent,
     ErrorComponent,
     RegisterComponent,
-    TransactionComponent
+    TransactionComponent,
+    WalletComponent
   ],
   imports: [
     BrowserModule,

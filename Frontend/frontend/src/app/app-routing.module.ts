@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { TransactionComponent } from './transaction/transaction.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 const routes: Routes = [  
   {path:'',component: LoginComponent},
@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'logout',component: LogoutComponent},
   {path:'register',component: RegisterComponent},
   {path:'home', component: HomeComponent},
-  {path:'wallet', component: TransactionComponent},
+  {path:'wallet', component: WalletComponent},
   {path:'**',component: ErrorComponent}];
 
 
