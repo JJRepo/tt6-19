@@ -44,7 +44,7 @@ columns = ['id','wallet_id','debit_id','debit_currency', 'debit_amount',
             'credit_id', 'credit_currency', 'credit_amount', 'description', 'created_at', 'created_by', 'updated_at', 'updated_by']
 for row in transactions:
     keys= tuple(row[c] for c in columns)
-    cursor.execute('INSERT OR REPLACE into transactions values(?,?,?,?,?,?,?,?,?,?,?,?,?)',keys)
+    cursor.execute('INSERT OR REPLACE into transactionsss values(?,?,?,?,?,?,?,?,?,?,?,?,?)',keys)
     print(f'{row["debit_id"]} data inserted successfully')
 
 connection.commit()

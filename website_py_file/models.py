@@ -77,7 +77,7 @@ class Currency(db.Model):
 
 class Transaction(db.Model):
 
-    __tablename__ = 'transactions'
+    __tablename__ = 'transactionsss'
 
     id = db.Column(db.Integer, primary_key = True)
     debit_amount = db.Column(db.Float)
