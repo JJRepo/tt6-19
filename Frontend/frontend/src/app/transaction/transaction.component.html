@@ -1,4 +1,4 @@
-<h1>My Todo's</h1>
+<h1>My Transaction's</h1>
 
 <div class="alert alert-success" *ngIf="message">{{message}}</div>
 <div class="container">
@@ -6,10 +6,11 @@
         <caption> My Transaction's</caption>
         <thead>
             <tr>
-                <th>id</th>
-                <th>Description</th>
+                <th>ID</th>
+                <th>Desciption</th>
                 <th>Target Date</th>
-                <th>is Complete?</th>
+                <th>My Currency</th>
+                <th>ChangeCurrency</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
@@ -19,9 +20,27 @@
                 <td>{{transaction.id}}</td>
                 <td>{{transaction.description}}</td>
                 <td>{{transaction.targetDate}}</td>
-                <td>{{transaction.done}}</td>
+                <td>{{transaction.currency}}</td>
+                <div class="dropdown">
+                    <button class="dropbtn">Change Currency</button>
+                    <div class="dropdown-content">
+                      <a href="#">CAD</a>
+                      <a href="#">CNH</a>
+                      <a href="#">EUR</a>
+                      <a href="#">HDK</a>
+                      <a href="#">JPY</a>
+                      <a href="#">NZD</a>
+                      <a href="#">NJK</a>
+                      <a href="#">GBP</a>
+                      <a href="#">SEK</a>
+                      <a href="#">THB</a>
+                      <a href="#">USD</a>
+                    </div>
+                  </div>
                 <td><button (click)="updateTransaction(transaction.id)" class="btn btn-success">Update</button></td>
                 <td><button (click)="deleteTransaction(transaction.id)" class="btn btn-warning">Delete</button></td>
+
+
             </tr>
         </tbody>
         </table>
