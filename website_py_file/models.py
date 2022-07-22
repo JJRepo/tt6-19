@@ -56,6 +56,26 @@ class Wallet(db.Model):
     def __repr__(self):
         return f"user Name: {self.name} and wallet is : {self.user_id}"
 
+class ExchangeRate(db.Model):
+
+    # Create a table in the db
+    ### To be edited to suit the SQL framework
+    __tablename__ = 'exchange_rate'
+
+    id = db.Column(db.Integer, primary_key = True)
+    base_currency = db.Column(db.VARCHAR(20))
+    exchange_currency = db.Column(db.VARCHAR(20))
+    rate = db.Column(db.Float)
+
+    def __init__(self, base_currency, exchange_currency, rate):
+        self.base_currency = base_currency
+        self.exchange_currency = exchange_currency
+        self.rate = generate_rate
+
+    def __repr__(self):
+        rep = 'ExchangeRate(' + self.base_currency + ',' + self.exchange_currency + ',' + str(self.rate) + ')'
+        return rep
+        
 class Currency(db.Model):
 
     __tablename__ = 'currency'
