@@ -1,8 +1,6 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div>
-            <a href="https://www.sky.com">Multi-Currency Wallet</a>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand navbar-brand-head" href="https://www.sky.com">Multi-Currency Wallet</a>
         <ul class="navbar-nav">
             <li><a *ngIf="isUserLogIn" routerLink="/welcome/sky" class="nav-link">Home</a></li>
             <li><a *ngIf="isUserLogIn" routerLink="/wallet" class="nav-link">Wallet</a></li>
@@ -12,6 +10,5 @@
             <li><a *ngIf="!this.hardcodedAuthenService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
             <li><a *ngIf="this.hardcodedAuthenService.isUserLoggedIn()" routerLink="logout" class="nav-link">Logout</a></li>
         </ul>
-
     </nav>
 </header>

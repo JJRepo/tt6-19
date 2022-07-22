@@ -1,16 +1,18 @@
-<H1>Login!</H1>
-
-<div class="container">
+<div class="container login-div">
+    <h2 class="d-flex justify-content-center align-items-center mb-5">Login</h2>
     <div class="alert alert-warning" *ngIf="invalidLogin">{{errorMessage}}</div>
-    <div>
-        User Name : <input type="text" name="username" [(ngModel)]="username">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <!-- User Name : <input type="text" name="username" [(ngModel)]="username">
         Password : <input type="password" name="password" [(ngModel)]="password">
         <button (click)=handleLogin() class="btn btn-success"> Login </button>
-
-
         <p style="line-height:16px">
             Please click to <a routerLink="/register">Register</a> your username!
+        </p> -->
+        <input type="text" name="username" [(ngModel)]="username" class="inputfield mb-5" placeholder="Username">
+        <input type="password" name="password" [(ngModel)]="password" class="inputfield mb-5" placeholder="Password">
+        <p style="line-height:16px">
+            Don't have an account? <a routerLink="/register">Register</a> one with us today.
         </p>
-        
+        <button (click)=handleLogin() class="btn btn-dark"> Login </button>
     </div>
 </div>
