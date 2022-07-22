@@ -79,12 +79,15 @@ def getExchangeRates():
 
 def changeCurrencies(name,wallet_id,debit,debitamount,credit,creditamount,description):
     conn = initializeDbConn()
-    if conn != "Null":      
-        cur = conn.cursor()
-        cur.execute(f"""
-            INSERT INTO `transaction` (`wallet_id`,`debit_id`,`debit_currency`,`debit_amount`,`credit_id`,`credit_currency`,`credit_amount`,`description`,`created_at`,`created_by`)
-            VALUES (%s,(SELECT `id` FROM `currency` WHERE `wallet_id`=%s AND `currency`=%s)
-            ,%s, %s,(SELECT `id` FROM `currency` WHERE `wallet_id`=%s AND `currency`=%s),%s,%s,%s,%s,%s,%s)
-        """,(wallet_id,wallet_id,debit,debit,debitamount,wallet_id,credit,credit,creditamount,description,datetime.now(),name))
-        user = cur.fetchall()
-        return user
+    if conn != "Null":   
+        try:    
+            cur = conn.cursor()
+            cur.execute(f"""
+                INSERT INTO `transaction` (`wallet_id`,`debit_id`,`debit_currency`,`debit_amount`,`credit_id`,`credit_currency`,`credit_amount`,`description`,`created_at`,`created_by`)
+                VALUES (%s,(SELECT `id` FROM `currency` WHERE `wallet_id`=%s AND `currency`=%s)
+                ,%s, %s,(SELECT `id` FROM `currency` WHERE `wallet_id`=%s AND `currency`=%s),%s,%s,%s,%s,%s,%s)
+            """,(wallet_id,wallet_id,debit,debit,debitamount,wallet_id,credit,credit,creditamount,description,datetime.now(),name))
+            user = cur.fetchall()
+            return user
+        except:
+            return []
