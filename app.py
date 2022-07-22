@@ -41,6 +41,7 @@ def login():
             flash('Logged in successfully.')
             next = request.args.get('next')
 
+            if next == None or not next[0]=='/':
                 next = url_for('welcome_user')
 
             return redirect(next)
