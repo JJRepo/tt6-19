@@ -23,7 +23,6 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     wallet = db.relationship('Wallet',backref='user', uselist=False )
-    wallet = db.relationship('Wallet',backref='user', uselist=False )
 
     def __init__(self, email, username, password):
         self.email = email
@@ -46,6 +45,9 @@ class Wallet(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.Text)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    currency = db.relationship('Currency',backref='wallet' )
+    debit_id = db.relationship('Transaction',backref='user')
+    credit_id = db.relationship('Transaction',backref='user')
 
 
     def __init__(self, name, user_id ):
@@ -81,7 +83,7 @@ class Transaction(db.Model):
     debit_amount = db.Column(db.Float)
     debit_currency = db.Column(db.String(3))
     wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
-    debit_id = db.Column(db.Integer,db.ForeignKey('debit.id'))
+    debit_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
     currency_id = db.Column(db.Integer,db.ForeignKey('currency.id'))
     currency_amount = db.Column(db.Float)
     credit_currency = db.Column(db.String(3))
