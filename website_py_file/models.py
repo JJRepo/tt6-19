@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(64), unique=True, index=True)
-    username = db.Column(db.VARCHAR(20), unique=True, index=True)
+    username = db.Column(db.String(20), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     wallet = db.relationship('Wallet',backref='user', uselist=False )
     wallet = db.relationship('Wallet',backref='user', uselist=False )
@@ -62,7 +62,7 @@ class Currency(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     amount = db.Column(db.Float)
-    currency = db.Column(db.VARCHAR(3))
+    currency = db.Column(db.String(3))
     wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
 
 
@@ -73,18 +73,29 @@ class Currency(db.Model):
     def __repr__(self):
         return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
 
-# class Transaction(db.Model):
-# 
-#     __tablename__ = 'transaction'
+class Transaction(db.Model):
 
-    # id = db.Column(db.Integer, primary_key = True)
-    # amount = db.Column(db.Float)
-    # wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
-    #
-    #
-    # def __init__(self, amount, wallet_id ):
-    #     self.amount = amount
-    #     self.wallet_id = wallet_id
-    #
-    # def __repr__(self):
-    #     return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
+    __tablename__ = 'transaction'
+
+    id = db.Column(db.Integer, primary_key = True)
+    debit_amount = db.Column(db.Float)
+    debit_currency = db.Column(db.String(3))
+    wallet_id = db.Column(db.Integer,db.ForeignKey('wallet.id'))
+    debit_id = db.Column(db.Integer,db.ForeignKey('debit.id'))
+    currency_id = db.Column(db.Integer,db.ForeignKey('currency.id'))
+    currency_amount = db.Column(db.Float)
+    credit_currency = db.Column(db.String(3))
+    description = db.Column(db.Text)
+    created_at = db.Column(db.Datetime)
+    created_by = db.Column(db.Text)
+    updated_at = db.Column(db.Datetime)
+    updated_by = db.Column(db.Text)
+
+    def __init__(self, debit_amount, debit_currency, wallet_id,
+                debit_id, currency_id, currency_amount, credit_currency
+                description, created_at, created_by, updated_at, updated_by):
+        self.amount = amount
+        self.wallet_id = wallet_id
+
+    def __repr__(self):
+        return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
