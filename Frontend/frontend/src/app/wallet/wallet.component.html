@@ -1,1 +1,13 @@
-<p>wallet works!</p>
+<div>
+    <h2 class="mb-5">Wallet</h2>
+    <div class="container">
+        <div class="row">
+            <div *ngFor="let wallet of dummyData" class="col-lg-4 individual-card d-flex justify-content-center align-items-center">
+                <button class="wallet-btn">
+                    <p>Wallet ID: {{wallet.id}}</p>
+                    <p>Wallet Name: {{wallet.name}}</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

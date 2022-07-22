@@ -1,0 +1,14 @@
+.individual-card{
+    margin-bottom: 8rem;
+}
+
+.wallet-btn{
+    min-height: 150px;
+    background: transparent;
+}
+
+.wallet-btn:hover{
+    background-color: #000;
+    color: #fff;
+    transition: 0.3s ease-in;
+}
