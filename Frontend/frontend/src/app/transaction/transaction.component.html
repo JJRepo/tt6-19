@@ -1,0 +1,34 @@
+<h1>My Todo's</h1>
+
+<div class="alert alert-success" *ngIf="message">{{message}}</div>
+<div class="container">
+    <table class="table">
+        <caption> My Transaction's</caption>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Description</th>
+                <th>Target Date</th>
+                <th>is Complete?</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of transactions">
+                <td>{{transaction.id}}</td>
+                <td>{{transaction.description}}</td>
+                <td>{{transaction.targetDate}}</td>
+                <td>{{transaction.done}}</td>
+                <td><button (click)="updateTransaction(transaction.id)" class="btn btn-success">Update</button></td>
+                <td><button (click)="deleteTransaction(transaction.id)" class="btn btn-warning">Delete</button></td>
+            </tr>
+        </tbody>
+        </table>
+
+        <div class="row">
+            <button (click)="addTransaction()" class="btn btn-success">Add</button>
+        </div>
+</div>
+
+
