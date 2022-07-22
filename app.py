@@ -6,7 +6,7 @@ from website_py_file.models import User
 from website_py_file.forms import LoginForm, RegistrationForm
 from flask_jwt import JWT ,jwt_required
 import json
-from website_py_file.databaseAPI import loginCheck, getWallets, getWalletCurrencies, deleteWallet, getExchangeRates
+from website_py_file.databaseAPI import loginCheck, getWallets, getWalletCurrencies, deleteWallet, getExchangeRates, changeCurrencies
 # import uvicorn
 # from fastapi import FastAPI
 
@@ -79,10 +79,10 @@ def exchangerates():
 
 @app.route('/changecurrency', methods=['POST'])
 def changeCurrency():
-    user = json.loads(request.data)
-    rates = exchangerates()
-    if len(rates) > 0:
-        return json.dumps({"message":"success","rates":rates})
+    req = json.loads(request.data)
+    changer = changeCurrencies(req[0],req[1],req[2],req[3],req[4],req[5],req[6])
+    if len(changer) > 0:
+        return json.dumps({"message":"success"})
     else:
         return json.dumps({"message":"faield to delete"})
 
