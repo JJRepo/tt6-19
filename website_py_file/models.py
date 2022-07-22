@@ -73,9 +73,9 @@ class Currency(db.Model):
     def __repr__(self):
         return f"Amount in wallet: {self.amount} and wallet_id is : {self.wallet_id}"
 
-class Transaction(db.Model):
-
-    __tablename__ = 'transaction'
+# class Transaction(db.Model):
+# 
+#     __tablename__ = 'transaction'
 
     # id = db.Column(db.Integer, primary_key = True)
     # amount = db.Column(db.Float)
