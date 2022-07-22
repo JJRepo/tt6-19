@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'logout',component: LogoutComponent},
   {path:'register',component: RegisterComponent},
   {path:'home', component: HomeComponent},
-  {path:'wallet', component: TransactionComponent},
+  {path:'trans', component: TransactionComponent},
   {path:'**',component: ErrorComponent}];
 
 
