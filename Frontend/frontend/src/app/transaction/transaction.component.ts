@@ -8,6 +8,7 @@ export class Transaction{
     public id:number,
     public description:string,
     public currency:string,
+    public value:number,
     public targetDate:Date
   ){
 
@@ -24,7 +25,8 @@ export class TransactionComponent implements OnInit {
  // transactions: Transaction[] = [];
 
   transactions = [
-    new Transaction(1,'Transaction 1 ','SGD',new Date()),
+    new Transaction(1,'Transaction 1 ','SGD',100,new Date()),
+    new Transaction(2,'Transaction 2 ','CAD',20,new Date()),
   ]
   message!: string;
  
