@@ -1,16 +1,17 @@
 from flask import render_template, redirect, request, url_for, flash,abort
 from flask_login import login_user,login_required,logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from website_py_file import app,db
+from website_py_file.models import User
+from website_py_file.forms import LoginForm, RegistrationForm
 # import uvicorn
 # from fastapi import FastAPI
 
 
-#for routing to home page
 @app.route('/')
 def home():
     return render_template('home.html')
 
-#for routing to welcome page
 @app.route('/welcome')
 @login_required
 def welcome_user():
@@ -29,21 +30,17 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
-        # Grab the user from our User Models table
         ###To be edited to suit SQL
         user = User.query.filter_by(email=form.email.data).first()
 
 
         if user.check_password(form.password.data) and user is not None:
-            #Log in the user
+
 
             login_user(user)
             flash('Logged in successfully.')
             next = request.args.get('next')
 
-            # So let's now check if that next exists, otherwise we'll go to
-            # the welcome page.
-            if next == None or not next[0]=='/':
                 next = url_for('welcome_user')
 
             return redirect(next)
