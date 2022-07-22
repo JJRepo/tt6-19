@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from website_py_file import app,db
 from website_py_file.models import User
 from website_py_file.forms import LoginForm, RegistrationForm
+from flask_jwt import JWT ,jwt_required
 # import uvicorn
 # from fastapi import FastAPI
 

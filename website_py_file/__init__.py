@@ -8,6 +8,9 @@ from flask_login import LoginManager
 login_manager = LoginManager()
 
 app = Flask(__name__)
+api = Api(app)
+jwt = JWT(app, authenticate, identity)
+
 
 app.config['SECRET_KEY'] = 'mysecretkey'
 basedir = os.path.abspath(os.path.dirname(__file__))
